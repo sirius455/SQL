@@ -1,4 +1,4 @@
-# alter session set container = XEPDB1;
+ # alter session set container = XEPDB1;
  - 18c에만 있는 세션 개념
  - 예전 버전에는 없음
  - 세션 당 계정을 만들어야 한다
