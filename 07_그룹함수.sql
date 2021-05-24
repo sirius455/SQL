@@ -76,7 +76,7 @@ GROUP BY
 
 SELECT job_id, count(*) FROM employees GROUP BY job_id;
 
--- ※WHERE는 그룹이 생성되기 전에 모든 행에 적요오디는 조건이다
+-- ※WHERE는 그룹이 생성되기 전에 모든 행에 적용되는 조건이다
 
 SELECT job_id, count(*) FROM employees WHERE salary <= 5000 GROUP BY job_id;
 
