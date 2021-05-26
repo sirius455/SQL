@@ -163,13 +163,116 @@ WHERE
 
 -- 연습 2번 : Curtis와 동일한 직책을 가진 사원들의 모든 정보를 조회해보세요
 
-SELECT * FROM
-    employees e1, employees e2, jobs j
+SELECT e1.* FROM
+    employees e1, employees e2
 WHERE
-     e1.manager_id = e2.employee_id
-     AND e1.job_id = j.job_id
-     AND e2.first_name = 'Nancy';
+         e2.first_name = 'Curtis'
+     AND e2.job_id = e1.job_id;
+
+
+
+SELECT * FROM jobs;
+
+/*
+
+    # OUTER JOIN
+    
+        - JOIN 조건을 만족하지 못해서 등장하지 못했던 행들을 확인할 때 사용하는 JOIN
+        - (+)를 붙인쪽의 컬럼에 null을 추가해서, 등장하지 못했던 행들을 확인할 수 있다
+*/
+
+SELECT
+    employee_id,
+    first_name,
+    e.department_id,
+    d.department_id
+FROM
+    employees    e,
+    departments  d
+WHERE
+    e.department_id = d.department_id(+);
+
+-- 다음과 같은 쿼리문이 있을때 (+)를 왼쪽에 붙이는 경우 조회되는 데이터의 의미와
+-- (+)를 오른쪽에 붙이는 경우 조회되는 데이터의 의미를 각각 서술하시오
+
+SELECT
+    e1.manager_id,
+    e2.first_name,
+    e2.employee_id
+FROM
+    employees  e1,
+    employees  e2
+WHERE
+    e1.manager_id = e2.employee_id(+);
+
+/*
+
+    오른쪽 (+) :  e1.manager_id는 있지만. e2에는 일치하는게 없어서 출력되지 못한 행을 출력
+      
+        = > manager_id가 잘못된 경우. null, 매니저가 설정되지 않은 경우
+
+    왼쪽 (+) : e2.employee_id는 있지만. e1에는 일치하는게 없어서 출력되지 못한 행을 출력
+      
+        = > 직원이지만 부하직원은 없는 경우가 출력됨         
+        
+
+*/
+
+-- 연습1 : 사원명/부서번호/부서이름를 출력하되 사원이 한명도 속하지 않은 부서도 조회해보세요
+
+SELECT
+    first_name,
+    e.department_id,
+    department_name
+FROM
+    employees    e,
+    departments  d
+WHERE
+    e.department_id(+) = d.department_id;
+
+-- 연습2 : 사원명/직책ID/직책명를 출력하되 사원이 한명도 속하지 않은 직책도 조회해보세요
+
+SELECT
+    first_name,
+    e.job_id,
+    j.job_title
+FROM
+    employees   e,
+    jobs j
+WHERE
+    e.job_id(+) = j.job_id;
+
+--연습3 : 부서명/주소/도시명을 출력하되 소속된 부서가 없는 도시도 함께 조회해보세요
+
+SELECT
+   department_name,
+   street_address,
+   city
+FROM
+    departments d,
+    locations l
+WHERE
+   d.location_id(+) = l.location_id
+ORDER BY
+    department_name DESC;
+
+SELECT * FROM jobs;
 
 SELECT * FROM employees;
 
-SELECT * FROM jobs;
+SELECT * FROM locations;
+
+SELECT * FROM departments;
+
+SELECT * FROM employees WHERE job_id IS NOT NULL;
+
+
+
+
+
+
+
+
+
+
+
