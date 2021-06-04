@@ -1,0 +1,3 @@
+SELECT * FROM fruits;
+
+CREATE SEQUENCE fruits_seq INCREMENT BY 1;

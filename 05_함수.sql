@@ -246,7 +246,12 @@ SELECT TO_CHAR(150000000, '000,000,000,000,000L') FROM dual;
 
 SELECT TO_NUMBER('15,000,000￦', '99,999,999L') FROM dual;
 
-
+/*
+    # 날짜 컬럼 비교
+    
+    CHECK (visit_date > TO_DATE('2020/01/01', YYYY/MM//DD'))
+    CHECK (visit_date BETWEEN TO_DATE('2020/01/01', 'YYYY/MM/DD') AND TO_DATE('2021/01/01', 'YYYY/MM/DD');
+*/
 
 
 
